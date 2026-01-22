@@ -1,0 +1,40 @@
+.header
+{
+  /* padding: 2rem 10%; */
+  align-items: center;
+  border-bottom: 2px solid #ece1fa;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 10%;
+  padding: 1rem;
+  text-align: center;
+}
+
+.logo
+{
+  align-items: center;
+  color: #ece1fa;
+  display: flex;
+  font-size: 2rem;
+  gap: 1.5rem;
+}
+
+.button
+{
+  align-items: center;
+  background-color: #a990fb;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: #2a2630;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: bold;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.button:hover
+{
+  background-color: #8c6cf7;
+}

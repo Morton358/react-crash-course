@@ -4,7 +4,7 @@ import Post from '../Post/Post';
 import classes from './Posts.module.css';
 import Modal from '../Modal/Modal';
 
-const Posts = () => {
+const Posts = ({ isNewPostVisible, onCloseNewPost }: { isNewPostVisible: boolean; onCloseNewPost: () => void }) => {
   const [newPostText, setNewPostText] = useState('');
   const [newPostName, setNewPostName] = useState('');
 
@@ -16,11 +16,18 @@ const Posts = () => {
     setNewPostName(event.target.value);
   };
 
-  return (
-    <>
-      <Modal>
+  let modalContent = null;
+  if (isNewPostVisible) {
+    modalContent = (
+      <Modal onClose={onCloseNewPost}>
         <NewPost onNameChange={newPostNameChangedHandler} onTextChange={newPostTextChangedHandler} />
       </Modal>
+    );
+  }
+
+  return (
+    <>
+      {modalContent}
       <ul className={classes.posts}>
         <Post author={newPostName} body={newPostText} />
         <Post author='Jane Smith' body='I love coding!' />
