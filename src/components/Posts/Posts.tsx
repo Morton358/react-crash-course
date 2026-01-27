@@ -1,26 +1,21 @@
-import { useState } from 'react';
 import NewPost from '../NewPost/NewPost';
 import Post from '../Post/Post';
 import classes from './Posts.module.css';
 import Modal from '../Modal/Modal';
+import { useState } from 'react';
 
 const Posts = ({ isNewPostVisible, onCloseNewPost }: { isNewPostVisible: boolean; onCloseNewPost: () => void }) => {
-  const [newPostText, setNewPostText] = useState('');
-  const [newPostName, setNewPostName] = useState('');
+  const [postsData, setPostsData] = useState<{ name: string; text: string }[]>([]);
 
-  const newPostTextChangedHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNewPostText(event.target.value);
-  };
-
-  const newPostNameChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewPostName(event.target.value);
+  const addPostHandler = (post: { name: string; text: string }) => {
+    setPostsData((existingPosts) => [post, ...existingPosts]);
   };
 
   let modalContent = null;
   if (isNewPostVisible) {
     modalContent = (
       <Modal onClose={onCloseNewPost}>
-        <NewPost onNameChange={newPostNameChangedHandler} onTextChange={newPostTextChangedHandler} />
+        <NewPost onAddPost={addPostHandler} onClose={onCloseNewPost} />
       </Modal>
     );
   }
@@ -28,10 +23,14 @@ const Posts = ({ isNewPostVisible, onCloseNewPost }: { isNewPostVisible: boolean
   return (
     <>
       {modalContent}
-      <ul className={classes.posts}>
-        <Post author={newPostName} body={newPostText} />
-        <Post author='Jane Smith' body='I love coding!' />
-      </ul>
+      {postsData.length === 0 && <h3 className={classes['no-posts']}>No posts added yet.</h3>}
+      {postsData.length > 0 && (
+        <ul className={classes.posts}>
+          {postsData.map((post, index) => (
+            <Post key={index} author={post.name} body={post.text} />
+          ))}
+        </ul>
+      )}
     </>
   );
 };
