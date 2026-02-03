@@ -9,3 +9,9 @@
   grid-template-columns: repeat(3, 30%);
   justify-content: center;
 }
+
+.no-posts
+{
+  text-align: center;
+  color: whitesmoke;
+}
