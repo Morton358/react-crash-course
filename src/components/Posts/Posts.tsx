@@ -22,7 +22,7 @@ const Posts = ({ isNewPostVisible, onCloseNewPost }: { isNewPostVisible: boolean
     };
     fetchPosts();
 
-    return () => controller.abort();
+    return () => controller.abort(); // Cleanup fetch on unmount
   }, []);
 
   const addPostHandler = (post: { name: string; text: string }) => {
