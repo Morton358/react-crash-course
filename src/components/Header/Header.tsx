@@ -1,8 +1,9 @@
 import { BiSolidMessageRoundedAdd } from 'react-icons/bi';
 import { SiMicrodotblog } from 'react-icons/si';
+import { Link } from 'react-router-dom';
 import classes from './Header.module.css';
 
-function Header({ onCreatePost }: { onCreatePost: () => void }) {
+function Header() {
   return (
     <header className={classes.header}>
       <h1 className={classes.logo}>
@@ -10,10 +11,10 @@ function Header({ onCreatePost }: { onCreatePost: () => void }) {
         My Posts
       </h1>
       <p>
-        <button className={classes.button} onClick={onCreatePost}>
+        <Link to="/new-post" className={classes.button}>
           New Post
           <BiSolidMessageRoundedAdd size={18} />
-        </button>
+        </Link>
       </p>
     </header>
   );
