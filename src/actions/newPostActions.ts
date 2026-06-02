@@ -6,12 +6,22 @@ export async function action({ request }: { request: Request }) {
     name: formData.get('name') as string,
     text: formData.get('text') as string,
   };
-  await fetch('http://localhost:8080/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(postData),
-  });
+
+  try {
+    const response = await fetch('http://localhost:8080/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    });
+
+    if (!response.ok) {
+      return { error: `Failed to save post (${response.status}: ${response.statusText})` };
+    }
+  } catch {
+    return { error: 'Could not reach the server. Please try again.' };
+  }
+
   return redirect('/');
 }

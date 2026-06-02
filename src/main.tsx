@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { action as newPostAction } from './actions/newPostActions.ts';
 import { loader as postsLoader } from './loaders/postsLoader.ts';
+import ErrorPage from './routes/ErrorPage/ErrorPage.tsx';
 import MainLayout from './routes/MainLayout/MainLayout.tsx';
 import NewPost from './routes/NewPost/NewPost.tsx';
 import Posts from './routes/Posts/Posts.tsx';
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
