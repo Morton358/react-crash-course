@@ -26,6 +26,12 @@
   font-style: italic;
 }
 
+.link
+{
+  text-decoration: none;
+  color: inherit;
+}
+
 @keyframes animate-in
 {
   from
